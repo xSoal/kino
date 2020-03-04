@@ -1,0 +1,60 @@
+
+
+.timelineCont {
+    position: relative;
+    min-width: 100px;
+}
+
+.timelineEl {
+    position: absolute;
+    left: 0;
+    display: flex;
+    align-items: flex-start;
+}
+
+.timelineEl__line {
+    border-top: 1px solid #777;
+    height: 1px;
+}
+
+.isZeroTime .timelineEl__line {
+    width: 7px;
+}
+
+.isHalfHours .timelineEl__line {
+    width: 10px;
+}
+
+.timelineEl__time {
+    margin-left: 4px;
+}
+
+.isZeroTime .timelineEl__time {
+    font-size: 8px;
+}
+
+.isHalfHours .timelineEl__time {
+    font-size: 10px;
+}
+
+
+.flexCont {
+    display: flex;
+}
+
+
+.hallsCont {
+    position: relative;
+    bottom: 25px;
+}
+
+.hall__header {
+    height: 25px;
+}
+
+
+
+.release {
+    border: 1px solid blue;
+    border-radius: 4px;
+}

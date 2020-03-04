@@ -1,0 +1,18 @@
+
+
+header {
+    padding: 0 5px;
+
+}
+
+
+
+.dayNavigation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dayButton {
+    margin: 5px 15px;
+}

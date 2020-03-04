@@ -1,0 +1,28 @@
+
+
+.inputsCont {
+    display: flex;
+    /* text-align: center; */
+    min-width: 250px;
+}
+
+.inputsCont span {
+    /* display: flex; */
+   /* margin: 0 25px; */
+
+}
+
+.inputsCont label {
+    /* display: flex; */
+    /* align-items: center; */
+}
+
+.inputsCont input {
+    /* max-width: 55px; */
+    /* text-align: center; */
+}
+
+.title {
+    text-align: center;
+}
+
