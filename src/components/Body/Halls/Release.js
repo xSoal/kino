@@ -34,7 +34,7 @@ const Release = props => {
 			onMouseDown={mouseDownHandler}
 			onMouseUp={mouseUpHandler}
 			className={s.release}
-			style={{ height: data.heightPx, width: props.defaultReleaseWidth }}
+			style={{ top: data.fromTopPx, height: data.heightPx, width: props.defaultReleaseWidth }}
 			ref = { ref }
 		>
 			<div className="release__name">{data.name}</div>

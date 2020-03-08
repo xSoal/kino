@@ -38,9 +38,33 @@ const initState = {
 
 const hallsReducer = ( state = initState , action) => {
     switch (action.type) {
-        case FETCHING: {
+
+        case CHANGE_RELEASE_TIME: 
             return {
                 ...state,
+                hallsCurrentData: state.hallsCurrentData.map((hall, hallIndex) => {
+                    if (hallIndex === action.hallsWithReleaseIndex) {
+                        return {
+                            ...hall,
+                            releases: state.hallsCurrentData[action.hallsWithReleaseIndex].releases.map((release, releaseIndex) => {
+                                if (release.id === action.releaseId) {
+                                    return {
+                                        ...release,
+                                        fromTopPx: action.timeInPxStart
+                                    }
+                                }
+                                return {... release}
+                            })
+                        }
+                    }
+                    return {...hall}
+                })                                                                                                                                                                                                                                                          
+            }
+
+
+        case FETCHING: {
+            return {
+                ...state,                                                           
                 isLoading: true,
             }
         }
@@ -125,16 +149,33 @@ const _releaseTimeChange = (releaseId, timeStart, timeEnd, toTopPx) => {
     }
 }
 
-export const releaseTimeChange = (dispatch, getState, releaseId, timeInPxStart, timeInPxEnd) =>  {
-    console.log(timeInPxStart,timeInPxEnd)
+export const releaseTimeChange = (dispatch, getState, releaseId, mouse, mouseCoordsClickAboutSelf) =>  {
+
+
+    const hallsWithReleaseIndex = getState().hallsState.hallsCurrentData.findIndex(hall => {
+        return hall.releases.find(release => release.id === releaseId)
+    });
+
+    const hallsWithReleaseData = getState().hallsState.hallsCurrentData[hallsWithReleaseIndex];
+
+    const releaseIndex = hallsWithReleaseData.releases.findIndex(release => release.id === releaseId);
+    const releaseData = hallsWithReleaseData.releases[releaseIndex];
+
+    const timeInPxStart = mouse.fromSelfY - mouseCoordsClickAboutSelf.y + releaseData.heightPx/2;
+    const timeInPxEnd = timeInPxStart + releaseData.heightPx;
+
+
     dispatch({
         type: CHANGE_RELEASE_TIME,
         releaseId,
+        hallsWithReleaseIndex,
+        releaseIndex,
         timeInPxStart,
         timeInPxEnd
     })
 
 }
+
 
 
 

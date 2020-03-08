@@ -1,7 +1,10 @@
 import React, { Component } from "react";
+
 import "./libs";
 import "antd/dist/antd.css";
 import "./css.css"; 
+
+import {instance} from './api/api';
 
 import { Provider } from "react-redux";
 import store from "./reducers/store";

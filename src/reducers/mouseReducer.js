@@ -1,5 +1,7 @@
 
 
+import {releaseClickUp} from './timelineReducer'
+
 const MOUSE_CLICK = "MOUSE_CLICK";
 const MOUSE_UP = "MOUSE_UP";
 
@@ -32,14 +34,29 @@ const mouseReducer = ( state = initState , action) => {
 
 
 
-export const clickPress = () => ({
+const _clickPress = () => ({
     type: MOUSE_CLICK
 })
 
-export const clickUp = () => ({
+const _clickUp = () => ({
     type: MOUSE_UP
 })
 
+
+export const clickPress = () => (dispatch, getState) => {
+
+
+    dispatch(_clickPress())
+}
+
+export const clickUp = () => (dispatch, getState) => {
+
+    if(getState().timelineState.releaseClickDown.status){
+        dispatch(releaseClickUp());
+    }
+
+    dispatch(_clickUp())
+}
 
 
 

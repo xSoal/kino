@@ -11,6 +11,7 @@ import {releaseClickDown, releaseClickUp} from '../../../reducers/timelineReduce
 
 
 const Hall = props => {
+	// console.log(props.hallData, 'релизы')
 	const getReleases = releases =>
 		releases.map((rel, i) => (
 			<Release
@@ -31,7 +32,7 @@ const Hall = props => {
 };
 
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
 	defaultReleaseWidth: state.hallsState.hallsRules.defaultReleaseWidth
 })
 

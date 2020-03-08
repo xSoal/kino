@@ -200,19 +200,17 @@ const _releaseClickDown = (releaseId, mouseCoords) => ({
     mouseCoords
 })
 
-const _releaseClickUp = (releaseId, mouseCoords) => ({
+export const releaseClickUp = () => ({
     type: CLICK_UP_ON_RELEASE,
-    releaseId,
-    mouseCoords
 })
 
 export const releaseClickDown = (releaseId, mouseCoords) => (dispatch, getState) => {
     dispatch(_releaseClickDown(releaseId, mouseCoords));
 }
 
-export const releaseClickUp = (releaseId, mouseCoords) => (dispatch, getState) => {
-    dispatch(_releaseClickUp(releaseId, mouseCoords));
-}
+// export const releaseClickUp = () => (dispatch, getState) => {
+//     dispatch(_releaseClickUp());
+// }
 
 
 export const mouseUpdate = (mouseCoords) => (dispatch, getState) => {
@@ -230,24 +228,11 @@ export const mouseUpdate = (mouseCoords) => (dispatch, getState) => {
     // move release
     const releaseId = getState().timelineState.releaseClickDown.releaseId;
     const mouse = {...getState().timelineState.mouseCoords};
-    const mouseCoordsClickAboutSelf = {...getState().timelineState.mouseCoordsAboutSelf};
-
-    // fromSelfX
-
-    const hallsWithReleaseData = getState().hallsState.hallsCurrentData.find(hall => {
-        return hall.releases.find(release => release.id === releaseId)
-    });
-
-    const releaseData = hallsWithReleaseData.releases.find(release => release.id === releaseId);
+    const mouseCoordsClickAboutSelf = {...getState().timelineState.releaseClickDown.mouseCoordsAboutSelf};
 
 
-    const startTimeInPx = mouse.fromSelfX - mouseCoordsClickAboutSelf.x;
-    const endTimeInPx = mouse.fromSelfY - mouseCoordsClickAboutSelf.y;
 
-    
-    console.log(mouse , mouseCoordsClickAboutSelf.fromSelfX)
-
-    releaseTimeChange(dispatch, getState, releaseId, startTimeInPx, endTimeInPx);
+    releaseTimeChange(dispatch, getState, releaseId, mouse, mouseCoordsClickAboutSelf);
 
 
 }
